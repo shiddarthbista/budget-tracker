@@ -8,4 +8,20 @@ data class Account(
     val transactions: List<Transaction>,
     val accountBalance: Double,
     val budget: Double = 5000.00,
+    val goals: List<Goal> = listOf()
 )
+
+data class Goal(
+    val goalName: String,
+    val goalPrice: Double,
+    val currentAmount: Double
+)
+
+data class GoalTracker(
+    val goalName: String,
+    val goalPrice: Double,
+    val currentAmount: Double,
+    val goalPercentReached: Double
+) {
+    val progressBar = "█".repeat((goalPercentReached / 10).toInt()) + "-".repeat(10 - (goalPercentReached / 10).toInt())
+}
