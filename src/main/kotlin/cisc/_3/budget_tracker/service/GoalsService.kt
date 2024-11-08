@@ -44,7 +44,5 @@ class GoalsService(
             )
         } ?: throw AccountNotFoundException("Account number $accountNumber not found.")
         return goalTracker
-
-
     }
 }

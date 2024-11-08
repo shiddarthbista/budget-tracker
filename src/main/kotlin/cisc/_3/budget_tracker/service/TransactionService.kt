@@ -26,7 +26,9 @@ class TransactionService(
                 budget = it.budget - expenseAmount
             )
 
-            sendNotificationForNegativeBudget(updatedAccount.email)
+            if (updatedAccount.budget < 0) {
+                sendNotificationForNegativeBudget(updatedAccount.email)
+            }
 
             accountRepository.save(updatedAccount)
         } ?: throw AccountNotFoundException("Account number $accountNumber not found.")

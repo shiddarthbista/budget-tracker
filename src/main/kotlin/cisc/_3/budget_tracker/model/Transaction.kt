@@ -5,6 +5,7 @@ import java.util.UUID
 
 data class Transaction(
     val transactionId: UUID,
+    val transactionName: String,
     val amount: Double,
     val transactionType: TransactionType,
     val date: LocalDateTime = LocalDateTime.now(),
