@@ -27,7 +27,7 @@ class TransactionService(
             )
 
             if (updatedAccount.budget < 0) {
-                sendNotificationForNegativeBudget(updatedAccount.email)
+                sendNotificationForNegativeBudget(updatedAccount.email, "Negative budget of ${updatedAccount.budget}.")
             }
 
             accountRepository.save(updatedAccount)
@@ -39,8 +39,8 @@ class TransactionService(
 
     fun findTransactions(accountNumber: UUID) = accountRepository.findTransactions(accountNumber)
 
-    fun sendNotificationForNegativeBudget(emailAddress : String) {
-        notificationService.sendNotification(emailAddress)
+    fun sendNotificationForNegativeBudget(emailAddress : String, message: String) {
+        notificationService.sendNotification(emailAddress,"Negative Budget: $message")
     }
 
 }

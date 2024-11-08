@@ -35,7 +35,7 @@ class TransactionServiceTest {
     fun `When user has a list of transactions to add, but it exceeds budget, send notifications for negative budgets`() {
         every { accountRepository.save(any()) } returns Unit
         every { accountRepository.findByAccountNumber(validUUID) } returns account
-        every { notificationService.sendNotification(any()) } returns Unit
+        every { notificationService.sendNotification(any(),any()) } returns Unit
 
         val transactionWithHighExpense = Transaction(
             transactionId = transaction1UUID,
@@ -50,7 +50,7 @@ class TransactionServiceTest {
         transactionService.addTransactions(validUUID, transactionList3)
 
         verify { accountRepository.save(any()) }
-        verify { notificationService.sendNotification(any()) }
+        verify { notificationService.sendNotification(any(),any()) }
     }
 
     @Test
@@ -94,11 +94,11 @@ class TransactionServiceTest {
 
     @Test
     fun `When the expenses exceeds budget, send notification to the user`() {
-        every { notificationService.sendNotification(any()) } returns Unit
+        every { notificationService.sendNotification(any(),any()) } returns Unit
 
-        transactionService.sendNotificationForNegativeBudget("email@address.com")
+        transactionService.sendNotificationForNegativeBudget("email@address.com","Negative Budget")
 
-        verify { notificationService.sendNotification("email@address.com") }
+        verify { notificationService.sendNotification("email@address.com", "Negative Budget: Negative Budget") }
     }
 
     companion object {

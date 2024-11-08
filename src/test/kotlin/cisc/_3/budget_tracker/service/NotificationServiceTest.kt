@@ -15,10 +15,11 @@ class NotificationServiceTest {
     @Test
     fun `should log message when sending notification`() {
         val email = "test@example.com"
+        val message = "notification message"
 
-        every { log.info("Sending notification to $email") } just runs
-        notificationService.sendNotification(email)
+        every { log.info("Sending notification to $email with message $message") } just runs
+        notificationService.sendNotification(email,"notification message")
 
-        verify { log.info("Sending notification to test@example.com") }
+        verify { log.info("Sending notification to test@example.com with message notification message") }
     }
 }

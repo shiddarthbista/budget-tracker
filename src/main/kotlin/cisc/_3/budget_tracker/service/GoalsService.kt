@@ -24,7 +24,7 @@ class GoalsService(
 
             val totalGoalAmount = goals.sumOf { goal -> goal.currentAmount }
             if (totalGoalAmount > account.accountBalance) {
-                notificationService.sendNotification(account.email)
+                notificationService.sendNotification(account.email,"Insufficient funds")
                 throw InsufficientFundsException("You do not have sufficient funds to put towards your goals")
             }
 
@@ -34,8 +34,14 @@ class GoalsService(
 
     fun trackGoals(accountNumber: UUID): List<GoalTracker> {
         val account = accountRepository.findByAccountNumber(accountNumber)
+            ?: throw AccountNotFoundException("Account number $accountNumber not found.")
 
-        val goalTracker = account?.goals?.map {
+        if (account.goals.isEmpty()) {
+            notificationService.sendNotification(account.email,"No goals entered")
+            return emptyList()
+        }
+
+        val goalTracker = account.goals.map {
             GoalTracker(
                 goalName = it.goalName,
                 goalPrice = it.goalPrice,

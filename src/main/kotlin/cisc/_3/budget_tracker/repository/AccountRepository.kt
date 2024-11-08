@@ -3,7 +3,9 @@ package cisc._3.budget_tracker.repository
 import cisc._3.budget_tracker.exception.AccountNotFoundException
 import cisc._3.budget_tracker.model.Account
 import cisc._3.budget_tracker.model.Transaction
+import cisc._3.budget_tracker.model.TransactionType
 import org.springframework.stereotype.Repository
+import java.time.LocalDateTime
 import java.util.*
 
 @Repository
@@ -15,7 +17,14 @@ class AccountRepository {
         val testAccount = Account(
             accountId = UUID.fromString("28400685-d516-42d9-816f-e4e483089016"),
             accountHolderName = "Test Account",
-            transactions = mutableListOf(),
+            transactions = mutableListOf(Transaction(
+                transactionId = UUID.fromString("be98e378-ef8f-4967-a270-e2a4ffe68cd4"),
+                transactionName = "Global Inc.",
+                amount = 200.00,
+                transactionType = TransactionType.INCOME,
+                date = LocalDateTime.now(),
+                category = "Salary"
+            )),
             accountBalance = 5000.00,
             email = "test@gmail.com",
         )

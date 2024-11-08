@@ -55,7 +55,7 @@ class GoalsServiceTest {
         )
 
         every { accountRepository.findByAccountNumber(any()) } returns account
-        every { notificationService.sendNotification(any()) } returns Unit
+        every { notificationService.sendNotification(any(),any()) } returns Unit
         every { accountRepository.save(any()) } returns Unit
 
         assertThrows<InsufficientFundsException> { goalsService.addGoals(validUUID, goalsToAdd) }
@@ -68,12 +68,12 @@ class GoalsServiceTest {
         )
 
         every { accountRepository.findByAccountNumber(any()) } returns account
-        every { notificationService.sendNotification(any()) } returns Unit
+        every { notificationService.sendNotification(any(),any()) } returns Unit
         every { accountRepository.save(any()) } returns Unit
 
         assertThrows<InsufficientFundsException> { goalsService.addGoals(validUUID, goalsToAdd) }
 
-        verify { notificationService.sendNotification("Test@test.com") }
+        verify { notificationService.sendNotification("Test@test.com","Insufficient funds") }
     }
 
     @Test
@@ -95,6 +95,17 @@ class GoalsServiceTest {
         assertThat(expected[1].goalName).isEqualTo("XBox")
         assertThat(expected[1].goalPercentReached).isEqualTo(40.00)
         assertThat(expected[1].progressBar).isEqualTo("████------")
+    }
+
+    @Test
+    fun `When a user wants to track his goal ,but no goals has been entered, send notification`() {
+        every { accountRepository.findByAccountNumber(any()) } returns account
+        every { notificationService.sendNotification(any(),any()) } returns Unit
+
+        val expected = goalsService.trackGoals(validUUID)
+
+        assertThat(expected).isEmpty()
+        verify { notificationService.sendNotification(any(),any()) }
     }
 
     @Test
