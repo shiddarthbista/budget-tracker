@@ -5,6 +5,7 @@ import cisc._3.budget_tracker.model.Account
 import cisc._3.budget_tracker.model.Transaction
 import org.springframework.stereotype.Repository
 import java.util.*
+
 @Repository
 class AccountRepository {
 
@@ -15,7 +16,8 @@ class AccountRepository {
             accountId = UUID.fromString("28400685-d516-42d9-816f-e4e483089016"),
             accountHolderName = "Test Account",
             transactions = mutableListOf(),
-            accountBalance = 5000.00
+            accountBalance = 5000.00,
+            email = "test@gmail.com",
         )
         accounts[testAccount.accountId] = testAccount
 
