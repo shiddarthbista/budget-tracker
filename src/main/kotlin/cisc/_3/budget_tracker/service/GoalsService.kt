@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class GoalsService(private val accountRepository: AccountRepository) {
+class GoalsService(
+    private val accountRepository: AccountRepository,
+    private val notificationService: NotificationService
+) {
 
     fun addGoals(accountNumber: UUID, goals: List<Goal>) {
         val account = accountRepository.findByAccountNumber(accountNumber)
@@ -21,6 +24,7 @@ class GoalsService(private val accountRepository: AccountRepository) {
 
             val totalGoalAmount = goals.sumOf { goal -> goal.currentAmount }
             if (totalGoalAmount > account.accountBalance) {
+                notificationService.sendNotification(account.email)
                 throw InsufficientFundsException("You do not have sufficient funds to put towards your goals")
             }
 

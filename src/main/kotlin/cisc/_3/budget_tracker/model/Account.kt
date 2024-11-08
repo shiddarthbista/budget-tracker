@@ -8,7 +8,8 @@ data class Account(
     val transactions: List<Transaction>,
     val accountBalance: Double,
     val budget: Double = 5000.00,
-    val goals: List<Goal> = listOf()
+    val goals: List<Goal> = listOf(),
+    val email: String
 )
 
 data class Goal(

@@ -30,7 +30,7 @@ class TransactionController(
         @PathVariable accountId: UUID,
         @PathVariable transactionId: UUID
     ): ResponseEntity<Transaction> {
-        val transaction = transactionService.findTransaction(accountId, transactionId)
+        val transaction = transactionService.findTransactionByTransactionId(accountId, transactionId)
         return ResponseEntity.ok().body(transaction)
     }
 
