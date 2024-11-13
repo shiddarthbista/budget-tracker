@@ -51,6 +51,8 @@ Click on the green arrow and run the application OR `Shift` + `F10`
  3) Import collections on Postman
  4) Check out the functionalities of the API using the given collection
 
+## Test Coverage Reports Generated on 11/08/2024
+
 ~~~~
 ![coverage](https://github.com/user-attachments/assets/02f07292-fd44-46ee-a0a2-91ec8a61165d)
 ![Screenshot_8-11-2024_145619_localhost](https://github.com/user-attachments/assets/13d4b2b7-0e44-4a09-b5f3-6bf0bff60d23)
