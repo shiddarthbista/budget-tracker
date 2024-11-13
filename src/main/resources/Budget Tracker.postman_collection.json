@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "693a2044-6fff-421a-89ff-2c1948f711a1",
+		"name": "Budget Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39720934"
+	},
+	"item": [
+		{
+			"name": "Account Service",
+			"item": [
+				{
+					"name": "Account lookup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Account Information",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountHolderName\": \"Shiddarth Account\",\r\n  \"transactions\": [],\r\n  \"accountBalance\": 5000.00,\r\n  \"budget\": 2000.00,\r\n  \"email\": \"test@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/accounts/createNewAccount",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"createNewAccount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction Service",
+			"item": [
+				{
+					"name": "Transaction by Account ID Lookup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016/transaction/be98e378-ef8f-4967-a270-e2a4ffe68cd4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016",
+								"transaction",
+								"be98e378-ef8f-4967-a270-e2a4ffe68cd4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"transactionId\": \"4ed2df9b-a0c3-4b93-8304-bb4619aebb13\",\r\n        \"transactionName\" : \"TV\",\r\n        \"amount\": \"300.0\",\r\n        \"transactionType\": \"EXPENSES\",\r\n        \"category\" : \"Netflixx\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016/transaction",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Transactions By Account Lookup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016/transactions",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Goals Service",
+			"item": [
+				{
+					"name": "Add Goals",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"goalName\": \"TV\",\r\n        \"goalPrice\": 200,\r\n        \"currentAmount\" : 50\r\n    },\r\n    {\r\n        \"goalName\": \"XBOX\",\r\n        \"goalPrice\": 100,\r\n        \"currentAmount\" : 8\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016/goals",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016",
+								"goals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Goals Tracker",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/accounts/28400685-d516-42d9-816f-e4e483089016/goalsTracker",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"accounts",
+								"28400685-d516-42d9-816f-e4e483089016",
+								"goalsTracker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

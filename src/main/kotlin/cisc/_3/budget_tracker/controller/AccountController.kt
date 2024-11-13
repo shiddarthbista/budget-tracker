@@ -28,8 +28,8 @@ class AccountController(
     }
 
     @PutMapping("/{accountId}")
-    fun editAccount(@RequestBody account: Account): ResponseEntity<String> {
+    fun editAccount(@RequestBody account: Account, @PathVariable accountId: UUID): ResponseEntity<String> {
         val accountNumber = accountService.editAccount(account)
-        return ResponseEntity.ok().body("Successfully updated Account with account number $accountNumber successfully.")
+        return ResponseEntity.ok().body("Successfully updated Account with account number $accountId successfully.")
     }
 }
