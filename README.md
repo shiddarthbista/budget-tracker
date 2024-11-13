@@ -48,7 +48,7 @@ Click on the green arrow and run the application OR `Shift` + `F10`
 ### Running app on postman (Make sure you have the app running for this)
  1) Download [Postman](https://www.postman.com/downloads/).
  2) Download the collection from 
- 3) Import collections on Postman
+ 3) Import [collections](https://github.com/shiddarthbista/budget-tracker/blob/master/src/main/resources/Budget%20Tracker.postman_collection.json) on Postman
  4) Check out the functionalities of the API using the given collection
 
 ## Test Coverage Reports Generated on 11/08/2024
