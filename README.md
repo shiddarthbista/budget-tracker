@@ -53,7 +53,6 @@ Click on the green arrow and run the application OR `Shift` + `F10`
 
 ## Test Coverage Reports Generated on 11/08/2024
 
-~~~~
 ![coverage](https://github.com/user-attachments/assets/02f07292-fd44-46ee-a0a2-91ec8a61165d)
 ![Screenshot_8-11-2024_145619_localhost](https://github.com/user-attachments/assets/13d4b2b7-0e44-4a09-b5f3-6bf0bff60d23)
 ![Screenshot_8-11-2024_145627_localhost](https://github.com/user-attachments/assets/50719c56-f985-4ce6-9f92-9bc118236b27)
