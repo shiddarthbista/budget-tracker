@@ -61,13 +61,22 @@ const FetchAccount: React.FC = () => {
         <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '10px' }}>
           <h3>Account Details:</h3>
           <p>
-            <strong>ID:</strong> {accountInfo.id}
+            <strong>ID:</strong> {accountInfo.accountId}
           </p>
           <p>
-            <strong>Name:</strong> {accountInfo.name}
+            <strong>Name:</strong> {accountInfo.accountHolderName}
           </p>
           <p>
             <strong>Email:</strong> {accountInfo.email}
+          </p>
+          <p>
+            <strong>Balance:</strong> ${accountInfo.accountBalance}
+          </p>
+          <p>
+            <strong>Budget:</strong> ${accountInfo.budget}
+          </p>
+          <p>
+            <strong>goals:</strong> {accountInfo.goals}
           </p>
           {/* Add additional account fields as needed */}
         </div>
