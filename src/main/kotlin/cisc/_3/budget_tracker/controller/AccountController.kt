@@ -12,6 +12,7 @@ class AccountController(
     private val accountService: AccountService
 ) {
 
+    @CrossOrigin(origins = arrayOf("http://localhost:3000")) // Allow requests from React app
     @GetMapping("/{accountId}")
     fun findAccount(@PathVariable accountId: UUID): Account = accountService.findAccountByAccountNumber(accountId)
 
