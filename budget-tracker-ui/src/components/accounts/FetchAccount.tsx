@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { getAccountById } from '../../services/accountService';
+import { getAccountById, createAccount  } from '../../services/accountService';
+import { useNavigate } from 'react-router-dom';
 
 const FetchAccount: React.FC = () => {
   const [accountId, setAccountId] = useState('');
   const [accountInfo, setAccountInfo] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleFetchAccount = async () => {
     try {
@@ -12,9 +14,20 @@ const FetchAccount: React.FC = () => {
       const account = await getAccountById(accountId);
       setAccountInfo(account);
     } catch (err) {
-      setError('Failed to fetch account information. Please try again.');
+
+      if(accountId == ''){
+        setError('Enter account id.');
+      }
+      else{
+        setError('Failed to fetch account information. Please try again.');
+      }
+      
       setAccountInfo(null);
     }
+  };
+
+  const handleCreateAccount = () => {
+    navigate('/create'); // Navigate to the /createAccount page
   };
 
   return (
@@ -49,6 +62,21 @@ const FetchAccount: React.FC = () => {
         }}
       >
         Fetch Account
+      </button>
+
+      <button
+        onClick={handleCreateAccount}
+        style={{
+          padding: '10px 30px',
+          marginLeft: '20px',
+          backgroundColor: '#007BFF',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+      >
+        Create Account
       </button>
 
       {error && (
