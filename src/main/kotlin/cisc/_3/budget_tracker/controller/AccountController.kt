@@ -16,18 +16,21 @@ class AccountController(
     @GetMapping("/{accountId}")
     fun findAccount(@PathVariable accountId: UUID): Account = accountService.findAccountByAccountNumber(accountId)
 
+    @CrossOrigin(origins = arrayOf("http://localhost:3000"))
     @DeleteMapping("/{accountId}")
     fun deleteAccount(@PathVariable accountId: UUID): ResponseEntity<String> {
         accountService.deleteAccountByAccountNumber(accountId)
         return ResponseEntity.ok().body("Account $accountId has been deleted successfully.")
     }
 
+    @CrossOrigin(origins = arrayOf("http://localhost:3000"))
     @PostMapping("/createNewAccount")
     fun addNewAccount(@RequestBody account: Account): ResponseEntity<String> {
         val accountNumber = accountService.addNewAccount(account)
         return ResponseEntity.ok().body("New Account with account number $accountNumber created successfully.")
     }
 
+    @CrossOrigin(origins = arrayOf("http://localhost:3000"))
     @PutMapping("/{accountId}")
     fun editAccount(@RequestBody account: Account, @PathVariable accountId: UUID): ResponseEntity<String> {
         val accountNumber = accountService.editAccount(account)

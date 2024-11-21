@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAccountById, createAccount  } from '../../services/accountService';
+import { getAccountById, deleteAccount  } from '../../services/accountService';
 import { useNavigate } from 'react-router-dom';
 
 const FetchAccount: React.FC = () => {
@@ -15,7 +15,7 @@ const FetchAccount: React.FC = () => {
       setAccountInfo(account);
     } catch (err) {
 
-      if(accountId == ''){
+      if(accountId === ''){
         setError('Enter account id.');
       }
       else{
@@ -28,6 +28,27 @@ const FetchAccount: React.FC = () => {
 
   const handleCreateAccount = () => {
     navigate('/create'); // Navigate to the /createAccount page
+  };
+
+  const handleDeleteAccount = async () => {
+
+    console.log(accountId);
+    try {
+      setError(null); // Clear any previous errors
+      const account = await deleteAccount(accountId);
+
+      window.location.reload()
+    
+    } catch (err) {
+
+      if(accountId === ''){
+        setError('Enter account id.');
+      }
+      else{
+        setError('Failed to fetch account information. Please try again.');
+      }
+      
+    }
   };
 
   return (
@@ -106,6 +127,20 @@ const FetchAccount: React.FC = () => {
           <p>
             <strong>goals:</strong> {accountInfo.goals}
           </p>
+
+          <button
+        onClick={handleDeleteAccount}
+        style={{
+          padding: '10px 20px',
+          backgroundColor: '#007BFF',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+        }}
+      >
+        Delete Account
+      </button>
           {/* Add additional account fields as needed */}
         </div>
       )}

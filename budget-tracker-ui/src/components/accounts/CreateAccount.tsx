@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { createAccount } from '../../services/accountService'; // Adjust import based on folder structure
+
+interface Transaction {
+  id: string;
+  amount: number;
+  date: string;
+}
+
+interface Goal {
+  id: string;
+  description: string;
+  targetAmount: number;
+}
 
 const CreateAccount: React.FC = () => {
   const [formData, setFormData] = useState({
     accountHolderName: '',
     email: '',
     accountBalance: 0,
+    budget: 5000.0,
+    transactions: [] as Transaction[],
+    goals: [] as Goal[],
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -25,25 +40,39 @@ const CreateAccount: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    axios
-      .post('/api/accounts/createNewAccount', formData)
-      .then((response) => {
-        setSuccessMessage('Account created successfully!');
-        setFormData({ accountHolderName: '', email: '', accountBalance: 0 });
-        setErrors({});
-      })
-      .catch((error) => {
-        setErrors({ form: 'Failed to create account. Please try again.' });
-        console.error(error);
+
+
+    try {
+     const accountData =  await createAccount(formData);
+     console.log(accountData)
+      setSuccessMessage(accountData);
+      setFormData({
+        accountHolderName: '',
+        email: '',
+        accountBalance: 0,
+        budget: 5000.0,
+        transactions: [],
+        goals: [],
       });
+      setErrors({});
+    } catch (error) {
+      setErrors({ form: 'Failed to create account. Please try again.' });
+      console.error(error);
+    }
+
+  
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'accountBalance' || name === 'budget' ? parseFloat(value) : value,
+    }));
   };
 
   return (
@@ -98,6 +127,21 @@ const CreateAccount: React.FC = () => {
           {errors.accountBalance && <span style={styles.error}>{errors.accountBalance}</span>}
         </div>
 
+        <div style={styles.inputGroup}>
+          <label htmlFor="budget" style={styles.label}>
+            Budget:
+          </label>
+          <input
+            type="number"
+            name="budget"
+            id="budget"
+            placeholder="Enter budget"
+            value={formData.budget}
+            onChange={handleChange}
+            style={styles.input}
+          />
+        </div>
+
         {errors.form && <p style={styles.error}>{errors.form}</p>}
         {successMessage && <p style={styles.success}>{successMessage}</p>}
 
@@ -119,13 +163,13 @@ const styles = {
     boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
   },
   heading: {
-    textAlign: 'center' as React.CSSProperties['textAlign'], // Cast explicitly
+    textAlign: 'center' as React.CSSProperties['textAlign'],
     marginBottom: '20px',
     color: '#333',
   },
   form: {
-    display: 'flex' as React.CSSProperties['display'], // Explicit cast for display
-    flexDirection: 'column' as React.CSSProperties['flexDirection'], // Explicit cast for flexDirection
+    display: 'flex' as React.CSSProperties['display'],
+    flexDirection: 'column' as React.CSSProperties['flexDirection'],
   },
   inputGroup: {
     marginBottom: '15px',
