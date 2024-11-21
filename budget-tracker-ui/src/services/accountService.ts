@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:8080/api/accounts';
 export const getAccountById = async (accountId: string) => {
   try {
 
-    console.log("here");
+   
     const response = await axios.get(`${API_URL}/${accountId}`);
     return response.data; // Return account data
   } catch (error) {
