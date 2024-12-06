@@ -1,5 +1,5 @@
 <h1 align = "center">
-💵 BUDGET TRACKER 💵
+💵 Personal Finance Tracker 💵
 </h1>
 
 ---
